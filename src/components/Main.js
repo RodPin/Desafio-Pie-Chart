@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, TouchableOpacity, Dimensions, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { PieChart } from "react-native-svg-charts";
-import { Icon2 } from "react-native-vector-icons/MaterialCommunityIcons";
+
 const HEIGHT = Dimensions.get("window").height;
 const WIDTH = Dimensions.get("window").width;
 const BLUE = "#0066ff";
@@ -12,6 +12,7 @@ const AVAILABLE_COLOR = BLUE;
 const SPENT_COLOR = "red";
 const COLORS = [SPENT_COLOR, TO_PAY_COLOR, AVAILABLE_COLOR];
 const MAX = 1000;
+
 const SmallCircle = ({ color }) => (
   <View
     style={{
@@ -22,6 +23,7 @@ const SmallCircle = ({ color }) => (
     }}
   />
 );
+
 const Board = ({ color, label, amount }) => {
   return (
     <View
@@ -51,6 +53,7 @@ const Board = ({ color, label, amount }) => {
     </View>
   );
 };
+
 const Pie = ({ data }) => {
   const pieData = data
     .filter(value => value > 0)
@@ -64,8 +67,18 @@ const Pie = ({ data }) => {
 
   return <PieChart style={{ height: 200 }} data={pieData} />;
 };
-class BottomNavigator extends Component {
+
+class Main extends Component {
   state = { selectedTab: 0, data: [50, 10, 40] };
+  generetaRandomData() {
+    this.setState({
+      data: [
+        Math.floor(Math.random() * MAX),
+        Math.floor(Math.random() * MAX),
+        Math.floor(Math.random() * MAX)
+      ]
+    });
+  }
   render() {
     const { selectedTab, data } = this.state;
     return (
@@ -120,17 +133,7 @@ class BottomNavigator extends Component {
             zIndex: 10
           }}
         >
-          <TouchableOpacity
-            onPress={() =>
-              this.setState({
-                data: [
-                  Math.floor(Math.random() * MAX),
-                  Math.floor(Math.random() * MAX),
-                  Math.floor(Math.random() * MAX)
-                ]
-              })
-            }
-          >
+          <TouchableOpacity onPress={() => this.generetaRandomData()}>
             <Icon
               name="add"
               type="material"
@@ -220,4 +223,4 @@ class BottomNavigator extends Component {
   }
 }
 
-export default BottomNavigator;
+export default Main;

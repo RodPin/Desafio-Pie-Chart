@@ -8,7 +8,7 @@
 
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
-import BottomTab from "./src/components/BottomBar";
+import Main from "./src/components/Main";
 
 export default class App extends Component {
   render() {
@@ -16,11 +16,10 @@ export default class App extends Component {
       <View
         style={{
           flex: 1,
-          flexDirection: "column",
-          backgroundColor: "#cce0ff"
+          flexDirection: "column"
         }}
       >
-        <BottomTab />
+        <Main />
       </View>
     );
   }
